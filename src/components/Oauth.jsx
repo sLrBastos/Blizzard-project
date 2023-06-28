@@ -1,14 +1,19 @@
 import axios from "axios";
 import { useEffect } from "react";
-import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { getAccessToken } from "../reducers/GameSlice";
+
+
 
 const CLIENT_ID = "bbdd3352857a4f75832b4c5e3d0b5774";
 const CLIENT_SECRET = "10aWFwwTwouNsocO8vruhxG0RXqQhnDY";
 
 const Oauth = () => {
-  const [accessToken, setAccessToken] = useState("");
+  // const [accessToken, setAccessToken] = useState("");
 
-  const getAccessToken = () => {
+  const dispatch = useDispatch()
+
+  const fetchAccessToken = () => {
     const options = {
       method: "post",
       url: "https://oauth.battle.net/token",
@@ -20,31 +25,17 @@ const Oauth = () => {
         password: CLIENT_SECRET,
       },
     };
-    axios(options).then((res) => setAccessToken(res.data.access_token));
-  };
+    axios(options).then((res) => dispatch(getAccessToken(console.log(res.data.access_token))));
 
-  const getMounts = () => {
-    const options = {
-      method: "get",
-      url: "https://eu.api.blizzard.com/data/wow/mount/index",
-      params: {
-        ":region": "eu",
-        namespace: "static-eu",
-      },
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    };
-    axios(options).then((res) => console.log(res));
   };
+  
+
+  
 
   useEffect(() => {
-    getAccessToken();
+    fetchAccessToken();
   }, []);
 
-  useEffect(() => {
-    getMounts();
-  }, [accessToken]);
 
   return <div>Oauth</div>;
 };
