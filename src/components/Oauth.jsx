@@ -25,7 +25,8 @@ const Oauth = () => {
         password: CLIENT_SECRET,
       },
     };
-    axios(options).then((res) => dispatch(getAccessToken(console.log(res.data.access_token))));
+    axios(options)
+    .then((response) => dispatch(getAccessToken(response.data.access_token)));
 
   };
   

@@ -8,11 +8,12 @@ const Mounts = () => {
 
 
     const accessToken = useSelector((state) => state.Oauth.accessToken)
-    const mounts = useSelector((state) => state.Oauth.mounts)
+    const mounts = useSelector((state) => state.Oauth.mounts.mounts)
     const dispatch = useDispatch()
-    
+
 
     const fetchMounts = () => {
+
         const options = {
           method: "get",
           url: "https://eu.api.blizzard.com/data/wow/mount/index",
@@ -24,21 +25,25 @@ const Mounts = () => {
             Authorization: `Bearer ${accessToken}`,
           },
         };
-        axios(options).then((res) => dispatch(getMounts(console.log(res.data))));
-      };  
+        axios(options).then((res) => console.log(dispatch(getMounts(res.data))))
+
+
+      };
 
       useEffect(() => {
         fetchMounts();
       }, [accessToken]);
-    
+
 
   return (
     <div>
         <h1>Mounts</h1>
 
-        {mounts.map((mount) => (
+
+        {Object.keys(mounts).map((mount) => (
            <div key={mount.id}>
-            </div>
+            <h1>{console.log("beans", mount)}</h1>
+          </div>
         ))}
     </div>
   )
