@@ -26,7 +26,9 @@ const Oauth = () => {
       },
     };
     axios(options)
-    .then((response) => dispatch(getAccessToken(response.data.access_token)));
+    .then((response) => {
+      console.log(response.data)
+      dispatch(getAccessToken(response.data.access_token))});
 
   };
   

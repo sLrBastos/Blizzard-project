@@ -1,4 +1,5 @@
 import Mounts from "./components/Mounts"
+import Oauth from "./components/Oauth"
 
 
 function App() {
@@ -6,6 +7,7 @@ function App() {
   return (
     <>
     <h1>Collection</h1>
+    <Oauth/>
     <Mounts/>
     </>
   )
