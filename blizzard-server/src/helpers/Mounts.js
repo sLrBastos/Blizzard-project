@@ -1,9 +1,9 @@
 const axios = require("axios")
-require("dotenv").config()
 
 const fetchMounts = async () => {
 
     const response =  await axios ({
+
       method: "get",
       url: "https://eu.api.blizzard.com/data/wow/mount/index",
       params: {
@@ -12,7 +12,7 @@ const fetchMounts = async () => {
         namespace: "static-eu",
       },
       headers: {
-        Authorization: `Bearer ${process.env.ACCESS_TOKEN}`,
+        Authorization: `Bearer ${access_token}`,
       },
     });
     // axios(options).then((res) => (res.data.mounts))
