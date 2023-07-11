@@ -7,11 +7,21 @@ CREATE TABLE accessToken (
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 INSERT INTO 
-    accessToken (access_token, token_type, duration, sub)
+    accessToken (access_token)
 VALUES
     (
-        "EUqZhzRZJTMueMU0ZYyRQU2sihyhoYBdv2",
-        "bearer",
-        86399,
-        "bbdd3352857a4f75832b4c5e3d0b5774"
-    )
+        "example-token"
+    );
+
+
+
+CREATE TABLE mounts (
+    key_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255),
+    id INT
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+
+CREATE TABLE refs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    href VARCHAR(255)
+)

@@ -14,7 +14,9 @@ const generateAccessToken = async() => {
             password: process.env.CLIENT_SECRET,
         },
     })
-    return response.data
+    console.log("beans",response.data)
+    const accessToken = response.data.access_token
+    return accessToken
 }
 
 
