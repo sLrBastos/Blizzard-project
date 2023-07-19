@@ -12,18 +12,19 @@ const Access_Token = (req, res) => {
             duration: expires_in,
             sub: sub
     }
-    OAuth.insertAccessToken(accessToken)
-        .then((results) => 
-            res.status(201).json({
-                message: `Access Token ${access_token} added to the database`
-            })
-    )
+    OAuth.deleteAccessToken(OAuth.insertAccessToken(accessToken)
+    .then((results) => 
+        res.status(201).json({
+            message: `Access Token ${access_token} added to the database`
+        })
+        
+))
+    
     .catch((error) => {
         console.error(error);
         res.status(500).send("Error sending the Access Token to DB");
     });
 }
-
 
 const SelectAccessToken = (req, res) => {
     const {access_token} = req.body
@@ -41,7 +42,19 @@ const SelectAccessToken = (req, res) => {
           });
 }
 
+const ANNIHILATE = (req, res) => {
+    OAuth.deleteAccessToken()
+    .then((results) => {
+        if (results.affectedRows > 0) {
+            res.status(200).send("DELETION COMPLETED. BASED DOT COM")
+        } else {
+            res.status(400).send("CRINGE. NO BUENO")
+        }
+    })
+}
+
 module.exports = {
     Access_Token,
-    SelectAccessToken
+    SelectAccessToken,
+    ANNIHILATE
 }

@@ -15,7 +15,7 @@ const generateAccessToken = async() => {
         },
     })
     console.log("beans",response.data)
-    const accessToken = response.data.access_token
+    const accessToken = response.data
     return accessToken
 }
 

@@ -11,9 +11,9 @@ authRouter.get("/test", async (req, res) => {
 })
 
 authRouter.post("/access-token", OAuthController.Access_Token)
-authRouter.get("/access-token", OAuthController.SelectAccessToken )
+authRouter.get("/select-access-token", OAuthController.SelectAccessToken )
+authRouter.delete("/delete-access-token", OAuthController.ANNIHILATE)
 
 
-
-
+ 
 module.exports = authRouter

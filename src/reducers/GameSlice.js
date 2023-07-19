@@ -19,9 +19,15 @@ export const GameSlice = createSlice({
         return { ...state, mounts: action.payload.mounts };
       },
     },
+
+    getPlayer: { 
+      reducer(state, action) {
+        return {...state, playerData: action.payload.mounts}
+      }
+    }
   },
 });
 
-export const { getAccessToken, getMounts } = GameSlice.actions;
+export const { getAccessToken, getMounts, getPlayer } = GameSlice.actions;
 
 export default GameSlice.reducer;

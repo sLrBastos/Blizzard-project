@@ -1,6 +1,6 @@
 const axios = require("axios")
 
-const fetchMounts = async () => {
+const fetchMounts = async (accessToken) => {
   
     const response =  await axios ({
 
@@ -12,11 +12,11 @@ const fetchMounts = async () => {
         namespace: "static-eu",
       },
       headers: {
-        Authorization: `Bearer ${access_token}`,
+        Authorization: `Bearer ${accessToken}`,
       },
     });
     // axios(options).then((res) => (res.data.mounts))
-    return response.data
+    console.log("beans", accessToken)
 
 
   };

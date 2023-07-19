@@ -1,6 +1,11 @@
+const { access } = require("fs")
 const database = require("../../database")
 
-
+const deleteAccessToken = () => {
+    return database
+    .query("DELETE FROM accesstoken")
+    .then(([results]) => results)
+}
 const insertAccessToken = (accessToken) => {
     return database
     .query("INSERT INTO accesstoken SET ?", accessToken)
@@ -14,5 +19,6 @@ const findAccessToken = (access_token) => {
 
 module.exports = {
     insertAccessToken,
-    findAccessToken
+    findAccessToken,
+    deleteAccessToken
 }
