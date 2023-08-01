@@ -12,14 +12,18 @@ const Access_Token = (req, res) => {
             duration: expires_in,
             sub: sub
     }
-    OAuth.deleteAccessToken(OAuth.insertAccessToken(accessToken)
-    .then((results) => 
-        res.status(201).json({
-            message: `Access Token ${access_token} added to the database`
-        })
-        
-))
-    
+    OAuth.insertAccessToken(accessToken)
+        .then((results) => {
+
+        if(results.affectedRows > 0) {
+            res.status(201).json({
+                message: `Access Token ${access_token} added to the database`
+            })
+        } else {
+            res.status(401).send("NOT GOOD")
+        }
+            
+})
     .catch((error) => {
         console.error(error);
         res.status(500).send("Error sending the Access Token to DB");
@@ -27,12 +31,13 @@ const Access_Token = (req, res) => {
 }
 
 const SelectAccessToken = (req, res) => {
-    const {access_token} = req.body
-    OAuth.findAccessToken(access_token)
+    const {access_tokenn} = req.body
+    OAuth.findAccessToken(access_tokenn)
         .then((results) => {
-            if (results[0] != null && results.length > 0) {
+            console.log(results[0][0].access_token)
+            if (results[0][0].access_token === access_tokenn) {
                 res.status(200).send("Found Access Token matching")
-            } else {
+            } else{
                 res.status(404).send("Access Token not found")
             }
         })

@@ -4,8 +4,8 @@ const {fetchPlayerData} = require("../helpers/Player")
 
 playerRouter.get("/playertest", async (req, res) => {
     const data = await fetchPlayerData()
-    console.log(data.mounts)
-    res.json(data.mounts)
+    console.log(data.pets)
+    res.json(data.pets)
 })
 
 module.exports = playerRouter

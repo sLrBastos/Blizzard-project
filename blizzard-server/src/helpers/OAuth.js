@@ -2,22 +2,31 @@ const axios = require("axios")
 require("dotenv").config()
 
 
-const generateAccessToken = async() => {
-    const response = await axios({
+const generateAccessToken = async (clientId, clientSecret, tokenEndpoint) => {
+    try {
+     const response = await axios({
         method: "post",
-        url: "https://oauth.battle.net/token",
+        url: tokenEndpoint,
         params: {
                     grant_type: "client_credentials",
         },
         auth: {
-            username: process.env.CLIENT_ID ,
-            password: process.env.CLIENT_SECRET,
+            username: clientId,
+            password: clientSecret,
         },
     })
-    console.log("beans",response.data)
-    const accessToken = response.data
+     const accessToken = response.data.access_token
+    console.log("access Token", accessToken)
     return accessToken
+    } catch (error) {
+        console.error("Error fetching access token: ", error.message)
+        throw error
+    }
+   
 }
+
+
+     
 
 
 module.exports = {

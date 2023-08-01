@@ -6,8 +6,8 @@ const OAuthController = require("../controllers/OAuth.controller")
 
 authRouter.get("/test", async (req, res) => {   
     const data = await generateAccessToken()
-    console.log(data)
-    res.json(data)
+    console.log(data.access_token)
+    res.json(data.access_token)
 })
 
 authRouter.post("/access-token", OAuthController.Access_Token)
